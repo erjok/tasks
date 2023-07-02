@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace WizardWorld.Tools.Cli.Specs.Drivers;
+namespace WizardWorld.Tools.Cli.AcceptanceTests;
 
 public static class WizardWorldCliDriver
 {
