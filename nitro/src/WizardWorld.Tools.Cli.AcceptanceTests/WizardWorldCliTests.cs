@@ -6,7 +6,7 @@ public class WizardWorldCliTests
     public async Task Should_Get_Version()
     {
         var version = await WizardWorldCliDriver.GetVersionAsync();
-        version.Should().Be("0.1.1");
+        version.Should().Be("0.1.2");
     }
 
     [Fact]

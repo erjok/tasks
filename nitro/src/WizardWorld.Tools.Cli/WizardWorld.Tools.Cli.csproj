@@ -10,11 +10,15 @@
         <ToolCommandName>wizwo</ToolCommandName>
         <PackageOutputPath>./nupkg</PackageOutputPath>
         <PackageId>WizardWorld.Tool</PackageId>
-        <Version>0.1.1</Version>
+        <Version>0.1.2</Version>
     </PropertyGroup>
 
     <ItemGroup>
       <Folder Include="nupkg\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Refit" Version="7.0.0" />
     </ItemGroup>
 
 </Project>
