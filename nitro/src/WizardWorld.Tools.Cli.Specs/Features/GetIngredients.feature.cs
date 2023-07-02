@@ -19,7 +19,7 @@ namespace WizardWorld.Tools.Cli.Specs.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class ListIngredientsFeature : object, Xunit.IClassFixture<ListIngredientsFeature.FixtureData>, System.IDisposable
+    public partial class GetIngredientsFeature : object, Xunit.IClassFixture<GetIngredientsFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace WizardWorld.Tools.Cli.Specs.Features
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "ListIngredients.feature"
+#line 1 "GetIngredients.feature"
 #line hidden
         
-        public ListIngredientsFeature(ListIngredientsFeature.FixtureData fixtureData, WizardWorld_Tools_Cli_Specs_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public GetIngredientsFeature(GetIngredientsFeature.FixtureData fixtureData, WizardWorld_Tools_Cli_Specs_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,8 +40,8 @@ namespace WizardWorld.Tools.Cli.Specs.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "List ingredients", "\tIn order to know what ingredients are available\r\n\tAs a student wizard\r\n\tI want t" +
-                    "o list the names of the ingredients", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Get ingredients", "\tIn order to know what ingredients are available\r\n\tAs a student wizard\r\n\tI want t" +
+                    "o get the names of the ingredients", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -81,16 +81,16 @@ namespace WizardWorld.Tools.Cli.Specs.Features
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="List all ingredients")]
-        [Xunit.TraitAttribute("FeatureTitle", "List ingredients")]
-        [Xunit.TraitAttribute("Description", "List all ingredients")]
+        [Xunit.SkippableFactAttribute(DisplayName="Get all ingredients")]
+        [Xunit.TraitAttribute("FeatureTitle", "Get ingredients")]
+        [Xunit.TraitAttribute("Description", "Get all ingredients")]
         [Xunit.TraitAttribute("Category", "ingredients")]
-        public virtual void ListAllIngredients()
+        public virtual void GetAllIngredients()
         {
             string[] tagsOfScenario = new string[] {
                     "ingredients"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("List all ingredients", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all ingredients", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -123,7 +123,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("the following ingredients:", ((string)(null)), table1, "Given ");
 #line hidden
 #line 13
- testRunner.When("I list all ingredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I get all ingredients", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name"});
@@ -147,12 +147,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             public FixtureData()
             {
-                ListIngredientsFeature.FeatureSetup();
+                GetIngredientsFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                ListIngredientsFeature.FeatureTearDown();
+                GetIngredientsFeature.FeatureTearDown();
             }
         }
     }

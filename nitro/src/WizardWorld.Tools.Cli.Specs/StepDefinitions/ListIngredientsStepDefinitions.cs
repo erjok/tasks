@@ -1,27 +1,30 @@
-using System;
-using TechTalk.SpecFlow;
+using WizardWorld.Tools.Cli.Specs.Drivers;
 
 namespace WizardWorld.Tools.Cli.Specs.StepDefinitions
 {
     [Binding]
     public class ListIngredientsStepDefinitions
     {
+        private string[] names = null!;
+
         [Given(@"the following ingredients:")]
         public void GivenTheFollowingIngredients(Table table)
         {
-            throw new PendingStepException();
+            // NOTE: Use dummy server data
         }
 
-        [When(@"I list all ingredients")]
-        public void WhenIListAllIngredients()
+        [When(@"I get all ingredients")]
+        public async Task WhenIGetAllIngredients()
         {
-            throw new PendingStepException();
+            names = await WizardWorldCliDriver.GetIngredientsAsync();
         }
 
         [Then(@"the following ingredient names are displayed:")]
         public void ThenTheFollowingIngredientNamesAreDisplayed(Table table)
         {
-            throw new PendingStepException();
+            var expectedNames = table.Rows.Select(r => r["Name"]);
+            names.Should().BeEquivalentTo(expectedNames);
+            names.Should().BeInAscendingOrder();
         }
     }
 }
