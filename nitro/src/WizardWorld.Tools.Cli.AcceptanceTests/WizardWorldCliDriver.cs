@@ -4,6 +4,12 @@ namespace WizardWorld.Tools.Cli.AcceptanceTests;
 
 public static class WizardWorldCliDriver
 {
+    public static async Task<string> GetVersionAsync()
+    {
+        var output = await WizardWorldCliDriver.GetProcessOutputAsync("wizwo", "--version");
+        return output.Trim();
+    }
+
     public static async Task<string[]> GetIngredientsAsync()
     {
         var output = await WizardWorldCliDriver.GetProcessOutputAsync("wizwo", "get", "ingredients");

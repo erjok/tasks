@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
@@ -9,7 +9,12 @@
         <PackAsTool>true</PackAsTool>
         <ToolCommandName>wizwo</ToolCommandName>
         <PackageOutputPath>./nupkg</PackageOutputPath>
-        <Version>0.1.0</Version>
+        <PackageId>WizardWorld.Tool</PackageId>
+        <Version>0.1.1</Version>
     </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="nupkg\" />
+    </ItemGroup>
 
 </Project>

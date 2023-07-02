@@ -3,9 +3,10 @@ namespace WizardWorld.Tools.Cli.AcceptanceTests;
 public class WizardWorldCliTests
 {
     [Fact]
-    public Task Should_Get_Version()
+    public async Task Should_Get_Version()
     {
-        throw new NotImplementedException();
+        var version = await WizardWorldCliDriver.GetVersionAsync();
+        version.Should().Be("0.1.1");
     }
 
     [Fact]
