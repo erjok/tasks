@@ -17,9 +17,8 @@ if (args.Length == 2 && args[0] == "get" && args[1] == "ingredients")
 
 if (args.Length == 2 && args[0] == "get" && args[1] == "elixirs")
 {
-    var elixirs = await api.GetElixirs();
-    foreach (var elixir in elixirs.OrderBy(i => i.Name))
-        Console.WriteLine(elixir.Name);
+    foreach (var name in await service.GetElixirNamesAsync())
+        Console.WriteLine(name);
     return;
 }
 
