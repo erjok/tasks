@@ -16,6 +16,12 @@ public static class WizardWorldCliDriver
         return output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
     }
 
+    public static async Task<string[]> GetElixirsAsync()
+    {
+        var output = await WizardWorldCliDriver.GetProcessOutputAsync("wizwo", "get", "elixirs");
+        return output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+    }
+
     public static async Task<string> GetProcessOutputAsync(string fileName, params string[] args)
     {
         var process = new Process {

@@ -1,3 +1,6 @@
+using System;
+using System.Xml.Linq;
+
 namespace WizardWorld.Tools.Cli.AcceptanceTests;
 
 public class WizardWorldCliTests
@@ -12,12 +15,28 @@ public class WizardWorldCliTests
     [Fact]
     public async Task Should_Get_Ingredients()
     {
-        var names = await WizardWorldCliDriver.GetIngredientsAsync();
-        names.Should().BeEquivalentTo(
+        var ingredients = await WizardWorldCliDriver.GetIngredientsAsync();
+        ingredients.Should().BeEquivalentTo(
             "Frog brains",
             "Red spider",
             "Snake fangs"
         );
-        names.Should().BeInAscendingOrder();
+        ingredients.Should().BeInAscendingOrder();
+    }
+
+    [Fact]
+    public async Task Should_Get_Elixirs()
+    {
+        var elixirs = await WizardWorldCliDriver.GetElixirsAsync();
+        elixirs.Should().BeEquivalentTo(
+            "Null Potion",
+            "Frog Potion",
+            "Snake Potion",
+            "Spider Potion",
+            "Frog & Snake Potion",
+            "Frog & Spider Potion",
+            "All at Once Potion"
+        );
+        elixirs.Should().BeInAscendingOrder();
     }
 }
