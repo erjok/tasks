@@ -30,7 +30,7 @@ module.exports = {
         name: "Snake fangs"
       },
       {
-        id: "2ce52cc3-6b48-44ee-8857-d000b6267a8",
+        id: "2ce52cc3-6b48-44ee-8857-d000b6267a8f",
         name: "Frog brains"
       },
     ];

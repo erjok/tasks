@@ -15,6 +15,14 @@ if (args.Length == 2 && args[0] == "get" && args[1] == "ingredients")
     return;
 }
 
+if (args.Length == 2 && args[0] == "get" && args[1] == "elixirs")
+{
+    var elixirs = await api.GetElixirs();
+    foreach (var elixir in elixirs.OrderBy(i => i.Name))
+        Console.WriteLine(elixir.Name);
+    return;
+}
+
 var version = Assembly.GetExecutingAssembly().GetName().Version ?? new Version();
 var versionWithoutRevision = new Version(version.Major, version.Minor, version.Build);
 Console.WriteLine(versionWithoutRevision);
