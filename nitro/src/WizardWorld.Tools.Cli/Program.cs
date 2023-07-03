@@ -23,6 +23,13 @@ if (args.Length == 2 && args[0] == "get" && args[1] == "elixirs")
     return;
 }
 
+if (args.Length > 2)
+{
+    var ingredientNames = new[] { args[3], args[5] };
+    foreach(var ingredientName in ingredientNames)
+        Console.WriteLine(ingredientName);
+}
+
 var version = Assembly.GetExecutingAssembly().GetName().Version ?? new Version();
 var versionWithoutRevision = new Version(version.Major, version.Minor, version.Build);
 Console.WriteLine(versionWithoutRevision);

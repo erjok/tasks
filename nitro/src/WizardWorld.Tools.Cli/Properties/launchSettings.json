@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WizardWorld.Tools.Cli": {
+      "commandName": "Project",
+      "commandLineArgs": "get elixirs -i \"Frog brain\" -i \"Snake Fungs\""
+    }
+  }
+}
