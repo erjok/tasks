@@ -11,6 +11,7 @@ public class WizardWorldService
 
     public async Task<string[]> GetIngredientNamesAsync()
     {
-        throw new NotImplementedException();
+        var ingredients = await api.GetIngredients();
+        return ingredients.Where(i => i.Name != null).Select(i => i.Name!).Order().ToArray();
     }
 }

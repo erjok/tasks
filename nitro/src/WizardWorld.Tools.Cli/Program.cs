@@ -6,12 +6,12 @@ if (args.Length == 0)
     return;
 
 var api = RestService.For<IWizardWorldApi>("http://localhost:3000");
+var service = new WizardWorldService(api);
 
 if (args.Length == 2 && args[0] == "get" && args[1] == "ingredients")
 {
-    var ingredients = await api.GetIngredients();
-    foreach(var ingredient in ingredients.OrderBy(i => i.Name))
-        Console.WriteLine(ingredient.Name);
+    foreach(var name in await service.GetIngredientNamesAsync())
+        Console.WriteLine(name);
     return;
 }
 
