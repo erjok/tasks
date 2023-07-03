@@ -25,8 +25,9 @@ if (args.Length == 2 && args[0] == "get" && args[1] == "elixirs")
 if (args.Length > 2)
 {
     var ingredientNames = new[] { args[3], args[5] };
-    foreach(var ingredientName in ingredientNames)
-        Console.WriteLine(ingredientName);
+    foreach (var name in await service.GetElixirNamesThatCanBeCreatedFromAsync(ingredientNames))
+        Console.WriteLine(name);
+    return;
 }
 
 var version = Assembly.GetExecutingAssembly().GetName().Version ?? new Version();
