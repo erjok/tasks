@@ -13,7 +13,7 @@ public static class WizardWorldCliDriver
     public static async Task<string[]> GetIngredientsAsync()
     {
         var output = await WizardWorldCliDriver.GetProcessOutputAsync("wizwo", "get", "ingredients");
-        return output.Split(Environment.NewLine);
+        return output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
     }
 
     public static async Task<string> GetProcessOutputAsync(string fileName, params string[] args)
