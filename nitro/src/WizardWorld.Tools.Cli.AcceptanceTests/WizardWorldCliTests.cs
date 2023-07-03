@@ -3,14 +3,14 @@ namespace WizardWorld.Tools.Cli.AcceptanceTests;
 public class WizardWorldCliTests
 {
     [Fact]
-    public async Task Should_Get_Version()
+    public async Task Should_Display_Version()
     {
         var version = await WizardWorldCliDriver.GetVersionAsync();
         version.Should().Be("0.1.6");
     }
 
     [Fact]
-    public async Task Should_Get_Ingredients()
+    public async Task Should_Display_All_Ingredients()
     {
         var ingredients = await WizardWorldCliDriver.GetIngredientsAsync();
         ingredients.Should().BeInAscendingOrder();
@@ -22,7 +22,7 @@ public class WizardWorldCliTests
     }
 
     [Fact]
-    public async Task Should_Get_Elixirs()
+    public async Task Should_Display_All_Elixirs()
     {
         var elixirs = await WizardWorldCliDriver.GetElixirsAsync();
         elixirs.Should().BeInAscendingOrder();
@@ -38,7 +38,7 @@ public class WizardWorldCliTests
     }
 
     [Fact]
-    public async Task Should_Get_Elixirs_By_Ingredients()
+    public async Task Should_Display_Elixirs_That_Can_Be_Created_From_Given_Ingredients()
     {
         var elixirs = await WizardWorldCliDriver.GetElixirsByIngredientsAsync("Frog brains", "Snake fangs");
         elixirs.Should().BeInAscendingOrder();
@@ -48,5 +48,15 @@ public class WizardWorldCliTests
             "Snake Potion",
             "Frog & Snake Potion"
         );
+    }
+
+    [Fact]
+    public async Task Should_Display_Help()
+    {
+        var expected = """"
+            Description: ...
+            """";
+        var help = await WizardWorldCliDriver.GetHelpAsync();
+        help.Should().Be(expected);
     }
 }
