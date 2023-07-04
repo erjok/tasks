@@ -55,7 +55,7 @@ public class WizardWorldCliTests
     {
         var expected = """"
             Description:
-              WizardWorld CLI
+              Wizard World CLI
 
             Usage:
               wizwo [command] [options]
