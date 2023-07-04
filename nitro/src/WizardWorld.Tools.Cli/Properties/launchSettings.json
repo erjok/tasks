@@ -2,7 +2,7 @@
   "profiles": {
     "WizardWorld.Tools.Cli": {
       "commandName": "Project",
-      "commandLineArgs": "get elixirs -i \"Frog brain\" -i \"Snake Fungs\""
+      "commandLineArgs": "get elixirs --craftable-from \"Red spider\" \"Frog brains\""
     }
   }
 }

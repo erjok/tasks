@@ -24,12 +24,9 @@ public static class WizardWorldCliDriver
 
     public static async Task<string[]> GetElixirsByIngredientsAsync(params string[] ingredientNames)
     {
-        var args = new List<string>() { "get", "elixirs" };
+        var args = new List<string>() { "get", "elixirs", "--craftable-from" };
         foreach(var ingredientName in ingredientNames)
-        {
-            args.Add("-i");
             args.Add($"\"{ingredientName}\"");
-        }
 
         var output = await WizardWorldCliDriver.GetProcessOutputAsync("wizwo", args.ToArray());
         return output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);

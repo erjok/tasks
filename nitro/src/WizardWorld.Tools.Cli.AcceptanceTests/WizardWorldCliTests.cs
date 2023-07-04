@@ -6,7 +6,7 @@ public class WizardWorldCliTests
     public async Task Should_Display_Version()
     {
         var version = await WizardWorldCliDriver.GetVersionAsync();
-        version.Should().Be("0.1.6");
+        version.Should().Be("0.2.0");
     }
 
     [Fact]
@@ -54,9 +54,13 @@ public class WizardWorldCliTests
     public async Task Should_Display_Help()
     {
         var expected = """"
-            Description: ...
+            Description:
+              WizardWorld CLI
+
+            Usage:
+              wizwo [command] [options]
             """";
         var help = await WizardWorldCliDriver.GetHelpAsync();
-        help.Should().Be(expected);
+        help.Should().StartWith(expected);
     }
 }

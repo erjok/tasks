@@ -10,7 +10,7 @@
         <ToolCommandName>wizwo</ToolCommandName>
         <PackageOutputPath>./nupkg</PackageOutputPath>
         <PackageId>WizardWorld.Tool</PackageId>
-        <Version>0.1.6</Version>
+        <Version>0.2.0</Version>
     </PropertyGroup>
 
     <ItemGroup>
@@ -19,6 +19,7 @@
 
     <ItemGroup>
       <PackageReference Include="Refit" Version="7.0.0" />
+      <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
     </ItemGroup>
 
 </Project>
