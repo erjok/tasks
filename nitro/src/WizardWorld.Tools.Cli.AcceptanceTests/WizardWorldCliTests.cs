@@ -1,18 +1,34 @@
+using Microsoft.Extensions.Configuration;
+
 namespace WizardWorld.Tools.Cli.AcceptanceTests;
 
 public class WizardWorldCliTests
 {
+    private readonly WizardWorldCliDriver cliDriver;
+
+    public WizardWorldCliTests()
+    {
+        var config = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", false)
+            .AddEnvironmentVariables()
+            .Build();
+
+        var apiUri = config["WIZWO_API_URI"];
+        cliDriver = new WizardWorldCliDriver(apiUri!);
+    }
+
     [Fact]
     public async Task Should_Display_Version()
     {
-        var version = await WizardWorldCliDriver.GetVersionAsync();
+        var version = await cliDriver.GetVersionAsync();
         version.Should().Be("0.2.0");
     }
 
     [Fact]
     public async Task Should_Display_All_Ingredients()
     {
-        var ingredients = await WizardWorldCliDriver.GetIngredientsAsync();
+        var ingredients = await cliDriver.GetIngredientsAsync();
         ingredients.Should().BeInAscendingOrder();
         ingredients.Should().BeEquivalentTo(
             "Frog brains",
@@ -24,7 +40,7 @@ public class WizardWorldCliTests
     [Fact]
     public async Task Should_Display_All_Elixirs()
     {
-        var elixirs = await WizardWorldCliDriver.GetElixirsAsync();
+        var elixirs = await cliDriver.GetElixirsAsync();
         elixirs.Should().BeInAscendingOrder();
         elixirs.Should().BeEquivalentTo(
             "Null Potion",
@@ -40,7 +56,7 @@ public class WizardWorldCliTests
     [Fact]
     public async Task Should_Display_Elixirs_That_Can_Be_Created_From_Given_Ingredients()
     {
-        var elixirs = await WizardWorldCliDriver.GetElixirsByIngredientsAsync("Frog brains", "Snake fangs");
+        var elixirs = await cliDriver.GetElixirsByIngredientsAsync("Frog brains", "Snake fangs");
         elixirs.Should().BeInAscendingOrder();
         elixirs.Should().BeEquivalentTo(
             "Null Potion",
@@ -60,7 +76,7 @@ public class WizardWorldCliTests
             Usage:
               wizwo [command] [options]
             """";
-        var help = await WizardWorldCliDriver.GetHelpAsync();
-        help.Should().StartWith(expected);
+        var help = await cliDriver.GetHelpAsync();
+        help.Should().StartWith(expected.ReplaceLineEndings());
     }
 }

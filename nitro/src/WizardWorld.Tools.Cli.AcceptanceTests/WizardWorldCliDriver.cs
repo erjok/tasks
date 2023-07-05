@@ -2,46 +2,52 @@
 
 namespace WizardWorld.Tools.Cli.AcceptanceTests;
 
-public static class WizardWorldCliDriver
+public class WizardWorldCliDriver
 {
-    private static readonly string apiUri = "http://localhost:3000";
+    private static readonly string appName = "wizwo";
+    private readonly string apiUri;
 
-    public static async Task<string> GetVersionAsync()
+    public WizardWorldCliDriver(string apiUri)
     {
-        var output = await WizardWorldCliDriver.GetProcessOutputAsync("wizwo", "--version");
+        this.apiUri = apiUri;
+    }
+
+    public async Task<string> GetVersionAsync()
+    {
+        var output = await GetProcessOutputAsync("--version");
         return output.Trim();
     }
 
-    public static async Task<string[]> GetIngredientsAsync()
+    public async Task<string[]> GetIngredientsAsync()
     {
-        var output = await WizardWorldCliDriver.GetProcessOutputAsync("wizwo", "--uri", apiUri, "get", "ingredients");
+        var output = await GetProcessOutputAsync("--uri", apiUri, "get", "ingredients");
         return output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
     }
 
-    public static async Task<string[]> GetElixirsAsync()
+    public async Task<string[]> GetElixirsAsync()
     {
-        var output = await WizardWorldCliDriver.GetProcessOutputAsync("wizwo", "--uri", apiUri, "get", "elixirs");
+        var output = await GetProcessOutputAsync("--uri", apiUri, "get", "elixirs");
         return output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
     }
 
-    public static async Task<string[]> GetElixirsByIngredientsAsync(params string[] ingredientNames)
+    public async Task<string[]> GetElixirsByIngredientsAsync(params string[] ingredientNames)
     {
         var args = new List<string>() { "--uri", apiUri, "get", "elixirs", "--ingredients" };
         foreach(var ingredientName in ingredientNames)
             args.Add($"\"{ingredientName}\"");
 
-        var output = await WizardWorldCliDriver.GetProcessOutputAsync("wizwo", args.ToArray());
+        var output = await GetProcessOutputAsync(args.ToArray());
         return output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
     }
 
-    public static Task<string> GetHelpAsync() =>
-        WizardWorldCliDriver.GetProcessOutputAsync("wizwo", "-h");
+    public Task<string> GetHelpAsync() =>
+        GetProcessOutputAsync("-h");
 
-    public static async Task<string> GetProcessOutputAsync(string fileName, params string[] args)
+    private static async Task<string> GetProcessOutputAsync(params string[] args)
     {
         var process = new Process {
             StartInfo = new ProcessStartInfo {
-                FileName = fileName,
+                FileName = appName,
                 Arguments = String.Join(" ", args),
                 UseShellExecute = false,
                 CreateNoWindow = true,
