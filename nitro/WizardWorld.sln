@@ -7,9 +7,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{31675B99-920
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WizardWorld.Tools.Cli", "src\WizardWorld.Tools.Cli\WizardWorld.Tools.Cli.csproj", "{F2F02B1B-2DD4-490C-8752-4D0E7A23B6AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WizardWorld.Tools.Cli.AcceptanceTests", "src\WizardWorld.Tools.Cli.AcceptanceTests\WizardWorld.Tools.Cli.AcceptanceTests.csproj", "{DCB2B6A0-9071-4E99-BB3F-C92F68524B6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WizardWorld.Tools.Cli.AcceptanceTests", "src\WizardWorld.Tools.Cli.AcceptanceTests\WizardWorld.Tools.Cli.AcceptanceTests.csproj", "{DCB2B6A0-9071-4E99-BB3F-C92F68524B6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WizardWorld.Tools.Cli.UnitTests", "src\WizardWorld.Tools.Cli.UnitTests\WizardWorld.Tools.Cli.UnitTests.csproj", "{FF8F636A-3083-43C2-A473-787DE518663D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WizardWorld.Tools.Cli.UnitTests", "src\WizardWorld.Tools.Cli.UnitTests\WizardWorld.Tools.Cli.UnitTests.csproj", "{FF8F636A-3083-43C2-A473-787DE518663D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ED9FEFF8-94E1-4625-8BB0-B8FD93E7BCCB}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

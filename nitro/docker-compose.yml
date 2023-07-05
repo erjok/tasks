@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  api:
+    image: wizardworld/api
+    build:
+      context: .
+      dockerfile: src/WizardWorld.Api/Dockerfile
+
+  cli:
+    image: wizardworld/cli
+    build:
+      context: .
+      dockerfile: src/WizardWorld.Tools.Cli/Dockerfile
+
+  tests:
+    image: wizardworld/tests
+    build:
+      context: .
+      dockerfile: src/WizardWorld.Tools.Cli.AcceptanceTests/Dockerfile
+      args:
+        CLI_IMG: wizardworld/cli
+    environment:
+      WIZWO_API_URI: http://api
+    depends_on:
+      - api
+      - cli
