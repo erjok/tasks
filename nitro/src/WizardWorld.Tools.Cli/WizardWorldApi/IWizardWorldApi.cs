@@ -1,6 +1,7 @@
 ﻿using Refit;
+using WizardWorld.Tools.Cli.WizardWorldApi.Dtos;
 
-namespace WizardWorld.Tools.Cli;
+namespace WizardWorld.Tools.Cli.WizardWorldApi;
 
 public interface IWizardWorldApi
 {

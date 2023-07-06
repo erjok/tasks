@@ -1,4 +1,6 @@
 using WizardWorld.Tools.Cli.Specs;
+using WizardWorld.Tools.Cli.WizardWorldApi;
+using WizardWorld.Tools.Cli.WizardWorldApi.Dtos;
 
 namespace WizardWorld.Tools.Cli.UnitTests;
 

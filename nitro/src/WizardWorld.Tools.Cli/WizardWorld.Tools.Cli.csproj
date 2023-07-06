@@ -10,7 +10,7 @@
         <ToolCommandName>wizwo</ToolCommandName>
         <PackageOutputPath>./nupkg</PackageOutputPath>
         <PackageId>WizardWorld.Tool</PackageId>
-        <Version>0.2.1</Version>
+        <Version>0.2.2</Version>
     </PropertyGroup>
 
     <ItemGroup>

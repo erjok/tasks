@@ -1,4 +1,6 @@
-﻿namespace WizardWorld.Tools.Cli;
+﻿using WizardWorld.Tools.Cli.WizardWorldApi.Dtos;
+
+namespace WizardWorld.Tools.Cli;
 
 public static class DtoFormatExtensions
 {

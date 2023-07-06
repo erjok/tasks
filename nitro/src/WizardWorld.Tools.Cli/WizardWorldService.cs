@@ -1,4 +1,5 @@
 ﻿using WizardWorld.Tools.Cli.Specs;
+using WizardWorld.Tools.Cli.WizardWorldApi;
 
 namespace WizardWorld.Tools.Cli;
 

@@ -1,5 +1,6 @@
 ﻿using System.CommandLine;
 using Refit;
+using WizardWorld.Tools.Cli.WizardWorldApi;
 
 namespace WizardWorld.Tools.Cli.CliCommands;
 public class GetIngredientsCommand : Command

@@ -1,4 +1,4 @@
-﻿namespace WizardWorld.Tools.Cli;
+﻿namespace WizardWorld.Tools.Cli.WizardWorldApi.Dtos;
 
 public class IngredientDto
 {
