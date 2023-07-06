@@ -14,21 +14,13 @@ public class WizardWorldService
     public async Task<string[]> GetIngredientNamesAsync()
     {
         var ingredients = await api.GetIngredients();
-        return ingredients
-            .Where(i => i.Name != null)
-            .Select(i => i.Name!)
-            .Order()
-            .ToArray();
+        return ingredients.ToOrderedNames();
     }
 
     public async Task<string[]> GetElixirNamesAsync()
     {
         var elixirs = await api.GetElixirs();
-        return elixirs
-            .Where(e => e.Name != null)
-            .Select(e => e.Name!)
-            .Order()
-            .ToArray();
+        return elixirs.ToOrderedNames();
     }
 
     public async Task<string[]> GetElixirNamesAsync(IElixirSpecification specification)
@@ -36,9 +28,6 @@ public class WizardWorldService
         var elixirs = await api.GetElixirs();
         return elixirs
             .Where(specification.IsSatisfiedBy)
-            .Where(e => e.Name != null)
-            .Select(e => e.Name!)
-            .Order()
-            .ToArray();
+            .ToOrderedNames();
     }
 }
