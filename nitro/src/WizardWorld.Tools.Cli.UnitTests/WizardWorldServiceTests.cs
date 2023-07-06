@@ -47,7 +47,7 @@ public class WizardWorldServiceTests
         };
 
         api.GetElixirs().Returns(elixirs);
-        var names = await service.GetElixirNamesThatCanBeCreatedFromAsync("A", "B");
+        var names = await service.GetCraftableElixirNames("A", "B");
         names.Should().BeEmpty();
     }
 
@@ -61,7 +61,7 @@ public class WizardWorldServiceTests
         };
 
         api.GetElixirs().Returns(elixirs);
-        var names = await service.GetElixirNamesThatCanBeCreatedFromAsync("A", "B");
+        var names = await service.GetCraftableElixirNames("A", "B");
         names.Should().BeInAscendingOrder();
         names.Should().BeEquivalentTo("ElixirA", "ElixirAB", "ElixirB");
     }
@@ -75,7 +75,7 @@ public class WizardWorldServiceTests
         };
 
         api.GetElixirs().Returns(elixirs);
-        var names = await service.GetElixirNamesThatCanBeCreatedFromAsync("A", "B");
+        var names = await service.GetCraftableElixirNames("A", "B");
         names.Should().BeInAscendingOrder();
         names.Should().BeEquivalentTo("ElixirNone", "ElixirNull");
     }

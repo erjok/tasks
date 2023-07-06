@@ -29,11 +29,19 @@ public class WizardWorldService
             .ToArray();
     }
 
-    public async Task<string[]> GetElixirNamesThatCanBeCreatedFromAsync(params string[] ingredientNames)
+    public async Task<string[]> GetCraftableElixirNames(params string[] ingredientNames)
     {
         var elixirs = await api.GetElixirs();
+
+        Func<ElixirDto, bool> isCraftableFromGivenIngredients = elixir => {
+            if (elixir.Ingredients == null)
+                return true;
+
+            return elixir.Ingredients.All(i => ingredientNames.Contains(i.Name));
+        };
+
         return elixirs
-            .Where(e => e.Ingredients == null || e.Ingredients.All(i => ingredientNames.Contains(i.Name)))
+            .Where(isCraftableFromGivenIngredients)
             .Where(e => e.Name != null)
             .Select(e => e.Name!)
             .Order()
