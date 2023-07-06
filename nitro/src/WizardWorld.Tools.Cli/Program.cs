@@ -45,7 +45,7 @@ static CommandLineBuilder BuildCommandLine()
     var rootCommand = new RootCommand("Wizard World CLI") {
         new Command("get", "Displays all kinds of information relating to the Harry Potter universe.") {
             new GetIngredientsCommand(uriOption),
-            getElixirsCommand,
+            new GetElixirsCommand(uriOption),
         }
     };
 
