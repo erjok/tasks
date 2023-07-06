@@ -1,7 +1,9 @@
 ﻿using System.CommandLine;
 using Refit;
+using WizardWorld.Tools.Cli.Specs;
 
 namespace WizardWorld.Tools.Cli.CliCommands;
+
 public class GetElixirsCommand : Command
 {
     public GetElixirsCommand(Option<Uri> uriOption)
@@ -24,8 +26,9 @@ public class GetElixirsCommand : Command
     {
         var api = RestService.For<IWizardWorldApi>(uri.ToString());
         var service = new WizardWorldService(api);
+
         var names = ingredientNames.Any()
-            ? await service.GetCraftableElixirNames(ingredientNames)
+            ? await service.GetElixirNamesAsync(new CraftableElixirSpecification(ingredientNames))
             : await service.GetElixirNamesAsync();
 
         using var _ = new Chalk(ConsoleColor.Yellow);

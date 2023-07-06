@@ -22,7 +22,7 @@ public class WizardWorldCliTests
     public async Task Should_Display_Version()
     {
         var version = await cliDriver.GetVersionAsync();
-        version.Should().Be("0.2.0");
+        version.Should().Be("0.2.1");
     }
 
     [Fact]

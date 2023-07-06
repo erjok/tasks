@@ -1,3 +1,5 @@
+using WizardWorld.Tools.Cli.Specs;
+
 namespace WizardWorld.Tools.Cli.UnitTests;
 
 public class WizardWorldServiceTests
@@ -14,7 +16,7 @@ public class WizardWorldServiceTests
     }
 
     [Fact]
-    public async Task Should_Get_Ingredient_Names()
+    public async Task Should_Get_All_Ingredient_Names()
     {
         api.GetIngredients().Returns(new[] { ingredientB, ingredientA });
         var names = await service.GetIngredientNamesAsync();
@@ -23,7 +25,7 @@ public class WizardWorldServiceTests
     }
 
     [Fact]
-    public async Task Should_Get_Elixir_Names()
+    public async Task Should_Get_All_Elixir_Names()
     {
         var elixirs = new[] {
             new ElixirDto() { Name = "ElixirNone", Ingredients = Array.Empty<IngredientDto>() },
@@ -38,45 +40,20 @@ public class WizardWorldServiceTests
     }
 
     [Fact]
-    public async Task Should_Not_Get_Elixirs_That_Require_Extra_Ingredients()
+    public async Task Should_Get_Elixirs_That_Satisfy_Specification()
     {
-        var elixirs = new[] {
-            new ElixirDto() { Name = "ElixirAC", Ingredients = new[] { ingredientA, ingredientC }},
-            new ElixirDto() { Name = "ElixirBC", Ingredients = new[] { ingredientB, ingredientC }},
-            new ElixirDto() { Name = "ElixirC", Ingredients = new[] { ingredientC }},
-        };
+        var elixirA = new ElixirDto() { Name = "ElixirA" };
+        var elixirB = new ElixirDto() { Name = "ElixirB" };
+        var elixirC = new ElixirDto() { Name = "ElixirC" };
 
-        api.GetElixirs().Returns(elixirs);
-        var names = await service.GetCraftableElixirNames("A", "B");
-        names.Should().BeEmpty();
-    }
+        var spec = Substitute.For<IElixirSpecification>();
+        spec.IsSatisfiedBy(elixirA).Returns(true);
+        spec.IsSatisfiedBy(elixirB).Returns(false);
+        spec.IsSatisfiedBy(elixirC).Returns(true);
 
-    [Fact]
-    public async Task Should_Get_Elixirs_That_Can_Be_Created_From_Given_Ingredients()
-    {
-        var elixirs = new[] {
-            new ElixirDto() { Name = "ElixirAB", Ingredients = new[] { ingredientA, ingredientB }},
-            new ElixirDto() { Name = "ElixirA", Ingredients = new[] { ingredientA }},
-            new ElixirDto() { Name = "ElixirB", Ingredients = new[] { ingredientB }},
-        };
-
-        api.GetElixirs().Returns(elixirs);
-        var names = await service.GetCraftableElixirNames("A", "B");
+        api.GetElixirs().Returns(new[] { elixirA, elixirB, elixirC });
+        var names = await service.GetElixirNamesAsync(spec);
         names.Should().BeInAscendingOrder();
-        names.Should().BeEquivalentTo("ElixirA", "ElixirAB", "ElixirB");
-    }
-
-    [Fact]
-    public async Task Should_Get_Elixirs_That_Dont_Require_Ingredients()
-    {
-        var elixirs = new[] {
-            new ElixirDto() { Name = "ElixirNone", Ingredients = Array.Empty<IngredientDto>() },
-            new ElixirDto() { Name = "ElixirNull", Ingredients = null },
-        };
-
-        api.GetElixirs().Returns(elixirs);
-        var names = await service.GetCraftableElixirNames("A", "B");
-        names.Should().BeInAscendingOrder();
-        names.Should().BeEquivalentTo("ElixirNone", "ElixirNull");
+        names.Should().BeEquivalentTo("ElixirA", "ElixirC");
     }
 }

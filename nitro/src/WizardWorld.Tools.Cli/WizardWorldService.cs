@@ -1,4 +1,6 @@
-﻿namespace WizardWorld.Tools.Cli;
+﻿using WizardWorld.Tools.Cli.Specs;
+
+namespace WizardWorld.Tools.Cli;
 
 public class WizardWorldService
 {
@@ -29,19 +31,11 @@ public class WizardWorldService
             .ToArray();
     }
 
-    public async Task<string[]> GetCraftableElixirNames(params string[] ingredientNames)
+    public async Task<string[]> GetElixirNamesAsync(IElixirSpecification specification)
     {
         var elixirs = await api.GetElixirs();
-
-        Func<ElixirDto, bool> isCraftableFromGivenIngredients = elixir => {
-            if (elixir.Ingredients == null)
-                return true;
-
-            return elixir.Ingredients.All(i => ingredientNames.Contains(i.Name));
-        };
-
         return elixirs
-            .Where(isCraftableFromGivenIngredients)
+            .Where(specification.IsSatisfiedBy)
             .Where(e => e.Name != null)
             .Select(e => e.Name!)
             .Order()
