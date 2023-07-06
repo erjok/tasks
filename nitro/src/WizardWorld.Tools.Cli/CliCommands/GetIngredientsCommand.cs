@@ -14,6 +14,8 @@ public class GetIngredientsCommand : Command
     {
         var api = RestService.For<IWizardWorldApi>(uri.ToString());
         var service = new WizardWorldService(api);
+
+        using var _ = new Chalk(ConsoleColor.Cyan);
         foreach (var name in await service.GetIngredientNamesAsync())
             Console.WriteLine(name);
     }

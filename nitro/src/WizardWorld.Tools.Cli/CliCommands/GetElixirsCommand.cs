@@ -27,6 +27,8 @@ public class GetElixirsCommand : Command
         var names = ingredientNames.Any()
             ? await service.GetCraftableElixirNames(ingredientNames)
             : await service.GetElixirNamesAsync();
+
+        using var _ = new Chalk(ConsoleColor.Yellow);
         foreach (var name in names)
             Console.WriteLine(name);
     }
