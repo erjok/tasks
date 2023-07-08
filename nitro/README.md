@@ -28,3 +28,13 @@ Alternatively, you can manually build the CLI image:
     ```
 
     This command builds the `wizardworld/cli` image from the CLI Dockerfile.
+
+### Running the CLI image
+
+The Wizard World CLI can be executed from the Docker CLI with the `docker run` command:
+
+```shell
+docker run --rm -it wizardworld/cli
+```
+
+
