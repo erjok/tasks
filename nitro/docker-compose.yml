@@ -4,22 +4,21 @@ services:
   api:
     image: wizardworld/api
     build:
-      context: .
-      dockerfile: src/WizardWorld.Api/Dockerfile
+      context: ./src/WizardWorld.Api
 
   cli:
     image: wizardworld/cli
     build:
-      context: .
-      dockerfile: src/WizardWorld.Tools.Cli/Dockerfile
+      context: ./src/WizardWorld.Tools.Cli
+      tags:
+        - "wizardworld/cli:0.2.2"
 
   tests:
     image: wizardworld/tests
     build:
-      context: .
-      dockerfile: src/WizardWorld.Tools.Cli.AcceptanceTests/Dockerfile
+      context: ./src/WizardWorld.Tools.Cli.AcceptanceTests
       args:
-        CLI_IMG: wizardworld/cli
+        CLI_IMG: wizardworld/cli:0.2.2
     environment:
       WIZWO_API_URI: http://api
     depends_on:

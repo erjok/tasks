@@ -9,7 +9,8 @@
         <PackAsTool>true</PackAsTool>
         <ToolCommandName>wizwo</ToolCommandName>
         <PackageOutputPath>./nupkg</PackageOutputPath>
-        <PackageId>WizardWorld.Tool</PackageId>
+        <PackageId>WizardWorld.Cli</PackageId>
+        <Authors>Sergey Berezovskiy</Authors>
         <Version>0.2.2</Version>
     </PropertyGroup>
 
