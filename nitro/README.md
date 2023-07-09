@@ -58,3 +58,15 @@ Alternatively, you can build the CLI image from the CLI Dockerfile:
     ```
 
     This command builds the `wizardworld-cli` image tagged `latest`.
+
+## .NET tool
+
+### Prerequisites
+You will need .NET Core SDK 7 or above.
+
+### Installing CLI from nuget
+1. Install the tool from the nuget package by running the [dotnet tool install](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install) command
+
+    ```shell
+    dotnet tool install --global WizardWorld.Cli
+    ```
