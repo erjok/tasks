@@ -102,3 +102,60 @@ You will need [.NET Core SDK 7](https://dotnet.microsoft.com/en-us/download) or 
     You can invoke the tool using the following command: wizwo
     Tool 'wizardworld.cli' (version '0.2.2') was successfully installed.
     ```
+
+# Available Commands
+Wizard World CLI command has the following structure:
+
+```shell
+wizwo <command> <subcommand> [options and arguments]
+```
+
+For any Wizard World CLI command you can run its `help` command to get help information about the command:
+
+```shell
+wizwo get elixirs -h
+```
+
+The output shows the `get elixirs` command help:
+
+```Console
+Description:
+  Displays elixirs (potions) that can be created in the universe.
+
+Usage:
+  wizwo get elixirs [options]
+
+Options:
+  -i, --ingredients <ingredients>  One or more ingredients available to create elixirs.
+  --uri <uri>                      Wizard World API Uri. [default: https://wizard-world-api.herokuapp.com/]
+  -?, -h, --help                   Show help and usage information
+```
+
+By default, the CLI connects to the Wizard World API running at https://wizard-world-api.herokuapp.com. 
+Use the `--uri` option to configure API connection:
+
+```shell
+wizwo --uri http://localhost:3000 get ingredients
+```
+
+### Get Ingredients
+```shell
+wizwo get ingredients
+```
+Gets an ordered list of the names of all ingredients.
+
+### Get Elixirs
+```shell
+wizwo get elixirs
+```
+Gets an ordered list of the names of all elixirs.
+
+```shell
+wizwo get elixirs -i "Nagini's venom" "Unicorn blood"
+```
+Gets an ordered list of the names of elixirs that can be created from the given ingredients.
+
+```shell
+wizwo get elixirs -i ""
+```
+Gets an ordered list of the names of elixirs that require no ingredients to create.
