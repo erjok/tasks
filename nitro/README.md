@@ -16,7 +16,7 @@ This repository contains .NET command line tool **wizwo** used to interact with 
     ```
      
     This command builds the `cli` service specified in the `docker-compose.yml` file 
-and creates `wizardworld/cli` image tagget `latest` and `0.2.2`.
+and creates `wizardworld-cli` image tagget `latest` and `0.2.2`.
 
 Alternatively, you can manually build the CLI image:
 
@@ -24,17 +24,17 @@ Alternatively, you can manually build the CLI image:
 2. Run the following command within that folder:
 
     ```shell
-    docker build -t wizardworld/cli .
+    docker build -t wizardworld-cli .
     ```
 
-    This command builds the `wizardworld/cli` image from the CLI Dockerfile.
+    This command builds the `wizardworld-cli` image from the CLI Dockerfile.
 
 ### Running the CLI image
 
 The Wizard World CLI can be executed from the Docker CLI with the `docker run` command:
 
 ```shell
-docker run --rm -it wizardworld/cli
+docker run --rm -it wizardworld-cli
 ```
 
 

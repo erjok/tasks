@@ -2,23 +2,23 @@ version: '3.4'
 
 services:
   api:
-    image: wizardworld/api
+    image: wizardworld-api
     build:
       context: ./src/WizardWorld.Api
 
   cli:
-    image: wizardworld/cli
+    image: wizardworld-cli
     build:
       context: ./src/WizardWorld.Tools.Cli
       tags:
-        - "wizardworld/cli:0.2.2"
+        - "wizardworld-cli:0.2.2"
 
   tests:
-    image: wizardworld/tests
+    image: wizardworld-tests
     build:
       context: ./src/WizardWorld.Tools.Cli.AcceptanceTests
       args:
-        CLI_IMG: wizardworld/cli:0.2.2
+        CLI_IMG: wizardworld-cli:0.2.2
     environment:
       WIZWO_API_URI: http://api
     depends_on:
