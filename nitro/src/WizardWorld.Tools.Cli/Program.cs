@@ -29,5 +29,6 @@ static CommandLineBuilder BuildCommandLine()
 
     rootCommand.Name = "wizwo";
     rootCommand.AddGlobalOption(uriOption);
+    rootCommand.SetHandler(context => context.Parser.Invoke("-h"));
     return new CommandLineBuilder(rootCommand);
 }
