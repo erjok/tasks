@@ -6,5 +6,8 @@ RUN dotnet restore
 
 COPY . .
 RUN dotnet pack ./WizardWorld.Tools.Cli.csproj -o /nupkg
-RUN dotnet tool install --global --add-source /nupkg WizardWorld.Tool
-ENV PATH="${PATH}:/root/.dotnet/tools"
+RUN dotnet tool install --tool-path /wizwo --add-source /nupkg WizardWorld.Cli
+ENV PATH="${PATH}:/wizwo"
+WORKDIR /
+
+ENTRYPOINT ["wizwo"]

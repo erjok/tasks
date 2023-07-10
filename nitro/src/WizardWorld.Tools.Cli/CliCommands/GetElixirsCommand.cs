@@ -32,7 +32,7 @@ public class GetElixirsCommand : Command
             ? await service.GetElixirNamesAsync(new CraftableElixirSpecification(ingredientNames))
             : await service.GetElixirNamesAsync();
 
-        using var _ = new Chalk(ConsoleColor.Yellow);
+        using var _ = new Chalk(ConsoleColor.Cyan);
         foreach (var name in names)
             Console.WriteLine(name);
     }
