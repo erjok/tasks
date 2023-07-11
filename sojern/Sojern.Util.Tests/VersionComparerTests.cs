@@ -13,4 +13,14 @@ public class VersionComparerTests
         var comparer = new VersionComparer();
         comparer.Compare(version1, version2).Should().Be(1);
     }
+
+    [Theory]
+    [InlineData("1", "1")]
+    [InlineData("1.2", "1.2")]
+    [InlineData("1.2.3", "1.2.3")]
+    public void Should_Return_0_When_Version1_Equals_Version2(string version1, string version2)
+    {
+        var comparer = new VersionComparer();
+        comparer.Compare(version1, version2).Should().Be(0);
+    }
 }
