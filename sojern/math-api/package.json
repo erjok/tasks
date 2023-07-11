@@ -1,0 +1,11 @@
+{
+  "name": "math-api",
+  "version": "1.0.0",
+  "description": "Homework Exercise",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha --recursive"
+  },
+  "author": "Sergey Berezovskiy",
+  "license": "ISC"
+}
