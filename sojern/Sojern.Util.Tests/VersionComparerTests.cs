@@ -2,7 +2,7 @@ namespace Sojern.Util.Tests;
 
 public class VersionComparerTests
 {
-    [Theory]
+    [Theory(DisplayName = "")]
     [InlineData("1.1", "0.1")]
     [InlineData("1.2", "1.1")]
     [InlineData("1.3", "1.2.9.9.9")]
@@ -14,7 +14,7 @@ public class VersionComparerTests
         comparer.Compare(version1, version2).Should().Be(1);
     }
 
-    [Theory]
+    [Theory(DisplayName = "")]
     [InlineData("1", "1")]
     [InlineData("1.2", "1.2")]
     [InlineData("1.2.3", "1.2.3")]
@@ -24,7 +24,7 @@ public class VersionComparerTests
         comparer.Compare(version1, version2).Should().Be(0);
     }
 
-    [Theory]
+    [Theory(DisplayName = "")]
     [InlineData("1.1", "0.1")]
     [InlineData("1.2", "1.1")]
     [InlineData("1.3", "1.2.9.9.9")]

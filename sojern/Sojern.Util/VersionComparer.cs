@@ -7,23 +7,21 @@ public class VersionComparer : IComparer<string>
         if (version1 == version2)
             return 0;
 
-        var revisions1 = Array.ConvertAll(version1.Split('.'), Int32.Parse);
-        var revisions2 = Array.ConvertAll(version2.Split('.'), Int32.Parse);
+        var revisions1 = version1.Split('.').Select(Int32.Parse).GetEnumerator();
+        var revisions2 = version2.Split('.').Select(Int32.Parse).GetEnumerator();
 
-        int i = 0;
-        while(true)
+        while (true)
         {
-            if (revisions1[i] < revisions2[i])
+            if (!revisions1.MoveNext())
                 return -1;
 
-            if (revisions1[i] > revisions2[i])
+            if (!revisions2.MoveNext())
                 return 1;
 
-            i++;
-            if (i == revisions1.Length)
+            if (revisions1.Current < revisions2.Current)
                 return -1;
 
-            if (i == revisions2.Length)
+            if (revisions1.Current > revisions2.Current)
                 return 1;
         }
     }
