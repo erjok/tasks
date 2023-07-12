@@ -3,7 +3,7 @@ import express from 'express';
 const app = express();
 
 app.get('/', (req, res) => {
-    res.sendStatus(200);
+    res.status(200).json({ version: '0.1.0' });
 });
 
 app.listen(3000, () => {
