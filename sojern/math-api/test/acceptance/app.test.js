@@ -15,7 +15,7 @@ describe("math api", () => {
 
     it("should return min numbers", (done) => {
         request(apiUri)
-            .get("/min?numbers=3,1,2&q=2")
+            .get("/min?numbers=3,1,2,5&q=2")
             .expect(200, {
                 numbers: [1, 2]
             }, done);
@@ -23,9 +23,17 @@ describe("math api", () => {
 
     it("should return max numbers", (done) => {
         request(apiUri)
-            .get("/max?numbers=3,1,2&q=2")
+            .get("/max?numbers=3,1,2,5&q=2")
             .expect(200, {
-                numbers: [3, 2]
+                numbers: [5, 3]
+            }, done);
+    });
+
+    it("should return average of numbers", (done) => {
+        request(apiUri)
+            .get("/max?numbers=3,1,2,5")
+            .expect(200, {
+                avg: 2.75
             }, done);
     });
 });
