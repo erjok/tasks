@@ -25,7 +25,7 @@ describe("math api", () => {
         request(apiUri)
             .get("/max?numbers=3,1,2&q=2")
             .expect(200, {
-                numbers: [2, 3]
+                numbers: [3, 2]
             }, done);
     });
 });
