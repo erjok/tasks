@@ -41,6 +41,17 @@ app.get('/median', (req, res) => {
     res.status(200).json({ median });
 });
 
+app.get('/percentile', (req, res) => {
+    const numbers = req.query.numbers?.split(',').filter(s => s).map(Number);
+    const quantifier = req.query.q || 1;
+    numbers.sort((a, b) => a - b);
+
+    var index = (quantifier / 100) * (numbers.length - 1);
+    var percentile = numbers[Math.round(index)];
+
+    res.status(200).json({ percentile });
+});
+
 app.listen(3000, () => {
     console.log('Server is running at http://localhost:3000');
 });
