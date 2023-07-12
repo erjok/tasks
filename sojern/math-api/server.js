@@ -22,6 +22,12 @@ app.get('/max', (req, res) => {
     res.status(200).json({ numbers: minNumbers });
 });
 
+app.get('/avg', (req, res) => {
+    const numbers = req.query.numbers?.split(',').filter(s => s).map(Number);
+    const avg = numbers.reduce((a, b) => a + b) / numbers.length;
+    res.status(200).json({ avg });
+});
+
 app.listen(3000, () => {
     console.log('Server is running at http://localhost:3000');
 });

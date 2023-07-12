@@ -31,7 +31,7 @@ describe("math api", () => {
 
     it("should return average of numbers", (done) => {
         request(apiUri)
-            .get("/max?numbers=3,1,2,5")
+            .get("/avg?numbers=3,1,2,5")
             .expect(200, {
                 avg: 2.75
             }, done);
