@@ -28,6 +28,19 @@ app.get('/avg', (req, res) => {
     res.status(200).json({ avg });
 });
 
+app.get('/median', (req, res) => {
+    const numbers = req.query.numbers?.split(',').filter(s => s).map(Number);
+    numbers.sort((a, b) => a - b);
+    let median = NaN;
+    if (numbers.length > 0) {
+        const isOdd = numbers.length % 2 === 1;
+        const midIndex = Math.floor(numbers.length / 2);
+        median = isOdd ? numbers[midIndex] : (numbers[numbers.length / 2 - 1] + numbers[numbers.length / 2]) / 2;
+    }
+
+    res.status(200).json({ median });
+});
+
 app.listen(3000, () => {
     console.log('Server is running at http://localhost:3000');
 });
