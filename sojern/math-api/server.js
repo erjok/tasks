@@ -43,7 +43,11 @@ app.get('/median', (req, res) => {
 
 app.get('/percentile', (req, res) => {
     const numbers = req.query.numbers?.split(',').filter(s => s).map(Number);
-    const quantifier = req.query.q || 1;
+    const quantifier = req.query.q || 0;
+    if (quantifier < 0 || quantifier > 100) {
+        return res.status(400).json({ error: 'Percentile quantifier must be between 0 and 100' });
+    }
+
     numbers.sort((a, b) => a - b);
 
     var index = (quantifier / 100) * (numbers.length - 1);
