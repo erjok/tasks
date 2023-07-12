@@ -44,5 +44,13 @@ describe("math api", () => {
                 median: 2.5
             }, done);
     });
+
+    it("should return qth percentile of numbers", (done) => {
+        request(apiUri)
+            .get("/percentile?numbers=3,1,2,5&q=75")
+            .expect(200, {
+                percentile: 3
+            }, done);
+    });
 });
 
