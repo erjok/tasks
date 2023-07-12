@@ -20,5 +20,13 @@ describe("math api", () => {
                 numbers: [1, 2]
             }, done);
     });
+
+    it("should return max numbers", (done) => {
+        request(apiUri)
+            .get("/max?numbers=3,1,2&q=2")
+            .expect(200, {
+                numbers: [2, 3]
+            }, done);
+    });
 });
 
