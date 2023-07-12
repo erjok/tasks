@@ -36,5 +36,13 @@ describe("math api", () => {
                 avg: 2.75
             }, done);
     });
+
+    it("should return median of numbers", (done) => {
+        request(apiUri)
+            .get("/median?numbers=3,1,2,5")
+            .expect(200, {
+                median: 2.5
+            }, done);
+    });
 });
 
