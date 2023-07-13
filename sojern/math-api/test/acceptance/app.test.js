@@ -56,8 +56,15 @@ describe("math api", () => {
     it("should return bad request when percentile quanitifer is not in the range 0-100", (done) => {
         request(apiUri)
             .get("/percentile?numbers=3,1,2,5&q=101")
+            .expect("Content-Type", /problem\+json/)
             .expect(400, {
-                error: 'Percentile quantifier must be between 0 and 100'
+                title: "One or more validation errors occurred.",
+                status: 400,
+                errors: {
+                    q : [
+                        "Percentile quantifier must be between 0 and 100."
+                    ]
+                }
             }, done);
     });
 });
