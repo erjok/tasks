@@ -43,8 +43,13 @@ app.get('/median', (req, res) => {
 });
 
 app.get('/percentile',
-    query('q', 'Percentile quantifier must be between 0 and 100.').isInt({ min: 0, max: 100 }),
-    query('numbers', 'Foo').custom(value => {
+    query('q')
+        .notEmpty().withMessage('Percentile quantifier is required.')
+        .isInt({ min: 0, max: 100 }).withMessage('Percentile quantifier must be between 0 and 100.'),
+    query('numbers', 'Numbers are required.')
+        .trim()
+        .notEmpty()
+        .custom(value => {
         const numbers = value.split(',').filter(s => s).map(Number);
 
         if (numbers.some(isNaN))

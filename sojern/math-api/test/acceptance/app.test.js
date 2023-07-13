@@ -66,6 +66,19 @@ describe("math api", () => {
             }, done);
     });
 
+    it("should return bad request when percentile quanitifer is missing", (done) => {
+        request(apiUri)
+            .get("/percentile?numbers=3,1,2,5")
+            .expect("Content-Type", /problem\+json/)
+            .expect(400, {
+                title: "One or more validation errors occurred.",
+                status: 400,
+                errors: {
+                    q : "Percentile quantifier is required."
+                }
+            }, done);
+    });
+
     it("should return bad request when numbers is not a number array", (done) => {
         request(apiUri)
             .get("/percentile?numbers=3,1,2a,5&q=1")
@@ -75,6 +88,19 @@ describe("math api", () => {
                 status: 400,
                 errors: {
                     numbers : "Numbers must be a comma-separated list of numbers."
+                }
+            }, done);
+    });
+
+    it("should return bad request when numbers are missing", (done) => {
+        request(apiUri)
+            .get("/percentile?q=1")
+            .expect("Content-Type", /problem\+json/)
+            .expect(400, {
+                title: "One or more validation errors occurred.",
+                status: 400,
+                errors: {
+                    numbers : "Numbers are required."
                 }
             }, done);
     });
