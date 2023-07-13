@@ -43,7 +43,15 @@ app.get('/median', (req, res) => {
 });
 
 app.get('/percentile',
-    query('q', 'Percentile quantifier must be between 0 and 100.').isInt({ min: 0, max: 100 }), (req, res, next) => {
+    query('q', 'Percentile quantifier must be between 0 and 100.').isInt({ min: 0, max: 100 }),
+    query('numbers', 'Foo').custom(value => {
+        const numbers = value.split(',').filter(s => s).map(Number);
+
+        if (numbers.some(isNaN))
+            throw new Error('Numbers must be a comma-separated list of numbers.');
+
+        return numbers.length > 0;
+    }), (req, res, next) => {
 
     const result = validationResult(req).formatWith(err => err.msg);
     if (!result.isEmpty()) {

@@ -65,5 +65,18 @@ describe("math api", () => {
                 }
             }, done);
     });
+
+    it("should return bad request when numbers is not a number array", (done) => {
+        request(apiUri)
+            .get("/percentile?numbers=3,1,2a,5&q=1")
+            .expect("Content-Type", /problem\+json/)
+            .expect(400, {
+                title: "One or more validation errors occurred.",
+                status: 400,
+                errors: {
+                    numbers : "Numbers must be a comma-separated list of numbers."
+                }
+            }, done);
+    });
 });
 
