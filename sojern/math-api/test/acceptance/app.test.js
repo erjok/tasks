@@ -79,7 +79,7 @@ describe("math api", () => {
             }, done);
     });
 
-    it("should return bad request when numbers is not a number array", (done) => {
+    it("should return bad request when percentile numbers is not a number array", (done) => {
         request(apiUri)
             .get("/percentile?numbers=3,1,2a,5&q=1")
             .expect("Content-Type", /problem\+json/)
@@ -92,9 +92,35 @@ describe("math api", () => {
             }, done);
     });
 
-    it("should return bad request when numbers are missing", (done) => {
+    it("should return bad request when percentile numbers are missing", (done) => {
         request(apiUri)
             .get("/percentile?q=1")
+            .expect("Content-Type", /problem\+json/)
+            .expect(400, {
+                title: "One or more validation errors occurred.",
+                status: 400,
+                errors: {
+                    numbers : "Numbers are required."
+                }
+            }, done);
+    });
+
+    it("should return bad request when avg numbers are missing", (done) => {
+        request(apiUri)
+            .get("/avg")
+            .expect("Content-Type", /problem\+json/)
+            .expect(400, {
+                title: "One or more validation errors occurred.",
+                status: 400,
+                errors: {
+                    numbers : "Numbers are required."
+                }
+            }, done);
+    });
+
+    it("should return bad request when median numbers are missing", (done) => {
+        request(apiUri)
+            .get("/median")
             .expect("Content-Type", /problem\+json/)
             .expect(400, {
                 title: "One or more validation errors occurred.",
