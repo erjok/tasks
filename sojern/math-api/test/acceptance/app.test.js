@@ -61,9 +61,7 @@ describe("math api", () => {
                 title: "One or more validation errors occurred.",
                 status: 400,
                 errors: {
-                    q : [
-                        "Percentile quantifier must be between 0 and 100."
-                    ]
+                    q : "Percentile quantifier must be between 0 and 100."
                 }
             }, done);
     });

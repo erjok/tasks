@@ -1,4 +1,5 @@
 import express from 'express';
+import { query, validationResult } from 'express-validator';
 
 const app = express();
 
@@ -41,12 +42,19 @@ app.get('/median', (req, res) => {
     res.status(200).json({ median });
 });
 
-app.get('/percentile', (req, res) => {
-    const numbers = req.query.numbers?.split(',').filter(s => s).map(Number);
-    const quantifier = req.query.q || 0;
-    if (quantifier < 0 || quantifier > 100) {
-        return res.status(400).json({ error: 'Percentile quantifier must be between 0 and 100' });
+app.get('/percentile',
+    query('q', 'Percentile quantifier must be between 0 and 100.').isInt({ min: 0, max: 100 }), (req, res, next) => {
+
+    const result = validationResult(req).formatWith(err => err.msg);
+    if (!result.isEmpty()) {
+        const error = new Error('One or more validation errors occurred.');
+        error.status = 400;
+        error.errors = result.mapped();
+        return next(error);
     }
+
+    const numbers = req.query.numbers?.split(',').filter(s => s).map(Number);
+    const quantifier = req.query.q;
 
     numbers.sort((a, b) => a - b);
 
@@ -54,6 +62,19 @@ app.get('/percentile', (req, res) => {
     var percentile = numbers[Math.round(index)];
 
     res.status(200).json({ percentile });
+});
+
+app.use((err, req, res, next) => {
+    const status = err.status || 500;
+    const problemDetails = {
+        status,
+        title: err.message,
+        errors: err.errors,
+    };
+
+    res.status(status)
+        .contentType('application/problem+json')
+        .json(problemDetails);
 });
 
 app.listen(3000, () => {
