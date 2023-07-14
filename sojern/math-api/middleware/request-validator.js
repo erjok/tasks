@@ -12,7 +12,7 @@ export default function (req, res, next) {
     }
 
     const error = new Error('One or more validation errors occurred.');
-    error.code = 'VALIDATION_ERROR';
+    error.code = 'ValidationError';
     error.errors = errors.mapped();
     next(error);
 }

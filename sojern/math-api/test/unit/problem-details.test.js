@@ -1,4 +1,5 @@
 import chai from 'chai';
+import ProblemDetails from '../../models/problem-details.js';
 
 const should = chai.should();
 

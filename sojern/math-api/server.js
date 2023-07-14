@@ -2,6 +2,7 @@ import express from 'express';
 import { query, validationResult } from 'express-validator';
 
 import reqValidator from './middleware/request-validator.js';
+import ProblemDetails from './models/problem-details.js';
 
 const app = express();
 const validateNumbers = () =>
@@ -76,17 +77,7 @@ app.get('/percentile',
     });
 
 app.use((err, req, res, next) => {
-    const problemDetails = {
-        title: err.message,
-    };
-
-    if (err.code === 'VALIDATION_ERROR') {
-        problemDetails.status = 400;
-        problemDetails.errors = err.errors;
-    } else {
-        problemDetails.status = 500;
-    }
-
+    const problemDetails = ProblemDetails.fromError(err);
     res.status(problemDetails.status)
         .contentType('application/problem+json')
         .json(problemDetails);
