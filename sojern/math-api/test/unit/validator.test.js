@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import { check } from 'express-validator';
 
-import reqValidator from '../../../middleware/request-validator.js';
+import reqValidator from '../../middleware/request-validator.js';
 
 const should = chai.should();
 chai.use(sinonChai);

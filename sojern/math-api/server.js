@@ -1,5 +1,5 @@
 import express from 'express';
-import { query, validationResult } from 'express-validator';
+import { query } from 'express-validator';
 
 import reqValidator from './middleware/request-validator.js';
 import ProblemDetails from './models/problem-details.js';
