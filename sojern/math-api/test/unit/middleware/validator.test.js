@@ -26,6 +26,7 @@ describe('request validator middleware' , () => {
         reqValidator(req, {}, next);
 
         const expectedError = sinon.match({
+            message: 'One or more validation errors occurred.',
             code: 'VALIDATION_ERROR',
             errors: {
                 foo: 'blah'
