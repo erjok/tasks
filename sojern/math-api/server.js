@@ -5,46 +5,49 @@ import reqValidator from './middleware/request-validator.js';
 
 const app = express();
 const validateNumbers = () =>
-    query('numbers', 'Numbers are required.')
+    query('numbers')
         .trim()
         .notEmpty()
+        .withMessage('Numbers are required.')
+        .customSanitizer(value => value.split(',').filter(s => s).map(Number))
         .custom(value => {
-            const numbers = value.split(',').filter(s => s).map(Number);
-
-            if (numbers.some(isNaN))
+            if (value.some(isNaN))
                 throw new Error('Numbers must be a comma-separated list of numbers.');
 
-            return numbers.length > 0;
+            if (value.length === 0)
+                throw new Error('Numbers must have at least one number.')
+
+            return true;
         });
 
 app.get('/', (req, res) => {
     res.status(200).json({ version: '0.1.0' });
 });
 
-app.get('/min', (req, res) => {
-    const numbers = req.query.numbers?.split(',').filter(s => s).map(Number);
-    const quantifier = req.query.q || 1;
+app.get('/min', validateNumbers(), reqValidator, (req, res) => {
+    const { numbers, q } = req.query;
     numbers.sort((a, b) => a - b);
-    const minNumbers = numbers.slice(0, quantifier);
+    const quanitifer = q || 1;
+    const minNumbers = numbers.slice(0, quanitifer);
     res.status(200).json({ numbers: minNumbers });
 });
 
-app.get('/max', (req, res) => {
-    const numbers = req.query.numbers?.split(',').filter(s => s).map(Number);
-    const quantifier = req.query.q || 1;
+app.get('/max', validateNumbers(), reqValidator, (req, res) => {
+    const { numbers, q } = req.query;
+    const quantifier = q || 1;
     numbers.sort((a, b) => b - a);
     const minNumbers = numbers.slice(0, quantifier);
     res.status(200).json({ numbers: minNumbers });
 });
 
 app.get('/avg', validateNumbers(), reqValidator, (req, res, next) => {
-    const numbers = req.query.numbers?.split(',').filter(s => s).map(Number);
+    const { numbers } = req.query;
     const avg = numbers.reduce((a, b) => a + b) / numbers.length;
     res.status(200).json({ avg });
 });
 
 app.get('/median', validateNumbers(), reqValidator, (req, res, next) => {
-    const numbers = req.query.numbers?.split(',').filter(s => s).map(Number);
+    const { numbers } = req.query;
     numbers.sort((a, b) => a - b);
     let median = NaN;
     if (numbers.length > 0) {
@@ -63,12 +66,10 @@ app.get('/percentile',
     validateNumbers(),
     reqValidator,
     (req, res, next) => {
-        const numbers = req.query.numbers?.split(',').filter(s => s).map(Number);
-        const quantifier = req.query.q;
-
+        const { numbers, q } = req.query;
         numbers.sort((a, b) => a - b);
 
-        var index = (quantifier / 100) * (numbers.length - 1);
+        var index = (q / 100) * (numbers.length - 1);
         var percentile = numbers[Math.round(index)];
 
         res.status(200).json({ percentile });
