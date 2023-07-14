@@ -2,6 +2,7 @@ import express from 'express';
 import { query } from 'express-validator';
 
 import reqValidator from './middleware/request-validator.js';
+import calculator from './services/calculator.js';
 import ProblemDetails from './models/problem-details.js';
 
 const app = express();
@@ -27,9 +28,7 @@ app.get('/', (req, res) => {
 
 app.get('/min', validateNumbers(), reqValidator, (req, res) => {
     const { numbers, q } = req.query;
-    numbers.sort((a, b) => a - b);
-    const quanitifer = q || 1;
-    const minNumbers = numbers.slice(0, quanitifer);
+    const minNumbers = calculator.min(numbers, q);
     res.status(200).json({ numbers: minNumbers });
 });
 
