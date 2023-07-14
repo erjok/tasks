@@ -1,6 +1,8 @@
 import express from 'express';
 import { query, validationResult } from 'express-validator';
 
+import reqValidator from './middleware/request-validator.js';
+
 const app = express();
 const validateNumbers = () =>
     query('numbers', 'Numbers are required.')
@@ -35,29 +37,13 @@ app.get('/max', (req, res) => {
     res.status(200).json({ numbers: minNumbers });
 });
 
-app.get('/avg', validateNumbers(), (req, res, next) => {
-    const result = validationResult(req).formatWith(err => err.msg);
-    if (!result.isEmpty()) {
-        const error = new Error('One or more validation errors occurred.');
-        error.status = 400;
-        error.errors = result.mapped();
-        return next(error);
-    }
-
+app.get('/avg', validateNumbers(), reqValidator, (req, res, next) => {
     const numbers = req.query.numbers?.split(',').filter(s => s).map(Number);
     const avg = numbers.reduce((a, b) => a + b) / numbers.length;
     res.status(200).json({ avg });
 });
 
-app.get('/median', validateNumbers(), (req, res, next) => {
-    const result = validationResult(req).formatWith(err => err.msg);
-    if (!result.isEmpty()) {
-        const error = new Error('One or more validation errors occurred.');
-        error.status = 400;
-        error.errors = result.mapped();
-        return next(error);
-    }
-
+app.get('/median', validateNumbers(), reqValidator, (req, res, next) => {
     const numbers = req.query.numbers?.split(',').filter(s => s).map(Number);
     numbers.sort((a, b) => a - b);
     let median = NaN;
@@ -74,16 +60,9 @@ app.get('/percentile',
     query('q')
         .notEmpty().withMessage('Percentile quantifier is required.')
         .isInt({ min: 0, max: 100 }).withMessage('Percentile quantifier must be between 0 and 100.'),
-    validateNumbers(), (req, res, next) => {
-
-        const result = validationResult(req).formatWith(err => err.msg);
-        if (!result.isEmpty()) {
-            const error = new Error('One or more validation errors occurred.');
-            error.status = 400;
-            error.errors = result.mapped();
-            return next(error);
-        }
-
+    validateNumbers(),
+    reqValidator,
+    (req, res, next) => {
         const numbers = req.query.numbers?.split(',').filter(s => s).map(Number);
         const quantifier = req.query.q;
 
@@ -96,14 +75,18 @@ app.get('/percentile',
     });
 
 app.use((err, req, res, next) => {
-    const status = err.status || 500;
     const problemDetails = {
-        status,
         title: err.message,
-        errors: err.errors,
     };
 
-    res.status(status)
+    if (err.code === 'VALIDATION_ERROR') {
+        problemDetails.status = 400;
+        problemDetails.errors = err.errors;
+    } else {
+        problemDetails.status = 500;
+    }
+
+    res.status(problemDetails.status)
         .contentType('application/problem+json')
         .json(problemDetails);
 });
