@@ -46,14 +46,7 @@ app.get('/avg', validateNumbers(), reqValidator, (req, res, next) => {
 
 app.get('/median', validateNumbers(), reqValidator, (req, res, next) => {
     const { numbers } = req.query;
-    numbers.sort((a, b) => a - b);
-    let median = NaN;
-    if (numbers.length > 0) {
-        const isOdd = numbers.length % 2 === 1;
-        const midIndex = Math.floor(numbers.length / 2);
-        median = isOdd ? numbers[midIndex] : (numbers[numbers.length / 2 - 1] + numbers[numbers.length / 2]) / 2;
-    }
-
+    const median = calculator.median(numbers);
     res.status(200).json({ median });
 });
 

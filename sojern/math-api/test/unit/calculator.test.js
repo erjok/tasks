@@ -38,4 +38,15 @@ describe('calculator', () => {
             calculator.avg(numbers).should.almost.equal(expected);
         });
     });
+
+    [
+        { numbers: [1], expected: 1 },
+        { numbers: [1, 2], expected: 1.5 },
+        { numbers: [1, 2, 5], expected: 2 },
+        { numbers: [1, 2, 3, 5], expected: 2.5 },
+    ].forEach(({ numbers, expected }) => {
+        it(`should find median of ${numbers}`, () => {
+            calculator.median(numbers).should.almost.equal(expected);
+        });
+    });
 });
