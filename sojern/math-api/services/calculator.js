@@ -25,9 +25,16 @@ function median(numbers) {
     }
 }
 
+function percentile(numbers, n) {
+    numbers.sort((a, b) => a - b);
+    var index = (n / 100) * (numbers.length - 1);
+    return numbers[Math.round(index)];
+}
+
 export default {
     min,
     max,
     avg,
     median,
+    percentile,
 }

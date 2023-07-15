@@ -49,4 +49,16 @@ describe('calculator', () => {
             calculator.median(numbers).should.almost.equal(expected);
         });
     });
+
+    [
+        { n: 1, expected: 1 },
+        { n: 10, expected: 1 },
+        { n: 25, expected: 2 },
+        { n: 75, expected: 4 },
+        { n: 99, expected: 5 },
+    ].forEach(({ n, expected }) => {
+        it(`should find ${n}th percentile`, () => {
+            calculator.percentile([4, 1, 5, 3, 2], n).should.almost.equal(expected);
+        });
+    });
 });

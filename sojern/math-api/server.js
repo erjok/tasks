@@ -58,11 +58,7 @@ app.get('/percentile',
     reqValidator,
     (req, res, next) => {
         const { numbers, q } = req.query;
-        numbers.sort((a, b) => a - b);
-
-        var index = (q / 100) * (numbers.length - 1);
-        var percentile = numbers[Math.round(index)];
-
+        const percentile = calculator.percentile(numbers, q);
         res.status(200).json({ percentile });
     });
 
