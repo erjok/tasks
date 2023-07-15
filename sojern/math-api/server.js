@@ -7,7 +7,7 @@ const app = express();
 app.use(mathRouter);
 
 app.get('/', (req, res) => {
-    res.status(200).json({ version: '0.1.0' });
+    res.status(200).json({ version: process.env.npm_package_version });
 });
 
 app.use((err, req, res, next) => {

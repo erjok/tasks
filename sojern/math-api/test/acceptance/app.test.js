@@ -9,7 +9,7 @@ describe("math api", () => {
         request(apiUri)
             .get("/")
             .expect(200, {
-                version: '0.1.0'
+                version: '1.0.0'
             }, done);
     });
 
