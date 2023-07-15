@@ -17,7 +17,7 @@ describe("math api", () => {
         request(apiUri)
             .get("/min?numbers=3,1,2,5&q=2")
             .expect(200, {
-                numbers: [1, 2]
+                minNumbers: [1, 2]
             }, done);
     });
 
@@ -25,7 +25,7 @@ describe("math api", () => {
         request(apiUri)
             .get("/max?numbers=3,1,2,5&q=2")
             .expect(200, {
-                numbers: [5, 3]
+                maxNumbers: [5, 3]
             }, done);
     });
 

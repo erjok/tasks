@@ -29,20 +29,18 @@ app.get('/', (req, res) => {
 app.get('/min', validateNumbers(), reqValidator, (req, res) => {
     const { numbers, q } = req.query;
     const minNumbers = calculator.min(numbers, q);
-    res.status(200).json({ numbers: minNumbers });
+    res.status(200).json({ minNumbers });
 });
 
 app.get('/max', validateNumbers(), reqValidator, (req, res) => {
     const { numbers, q } = req.query;
-    const quantifier = q || 1;
-    numbers.sort((a, b) => b - a);
-    const minNumbers = numbers.slice(0, quantifier);
-    res.status(200).json({ numbers: minNumbers });
+    const maxNumbers = calculator.max(numbers, q);
+    res.status(200).json({ maxNumbers });
 });
 
 app.get('/avg', validateNumbers(), reqValidator, (req, res, next) => {
     const { numbers } = req.query;
-    const avg = numbers.reduce((a, b) => a + b) / numbers.length;
+    const avg = calculator.avg(numbers);
     res.status(200).json({ avg });
 });
 

@@ -8,7 +8,12 @@ function max(numbers, count) {
     return numbers.slice(0, count);
 }
 
+function avg(numbers) {
+    return numbers.reduce((a, b) => a + b) / numbers.length;
+}
+
 export default {
     min,
-    max
+    max,
+    avg,
 }
