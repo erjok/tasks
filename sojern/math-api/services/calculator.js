@@ -3,6 +3,12 @@ function min(numbers, count) {
     return numbers.slice(0, count);
 }
 
+function max(numbers, count) {
+    numbers.sort((a, b) => b - a);
+    return numbers.slice(0, count);
+}
+
 export default {
-    min
+    min,
+    max
 }
