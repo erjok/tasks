@@ -1,8 +1,20 @@
 import express from 'express';
+import swaggerUi from 'swagger-ui-express';
+import yaml from 'yaml';
+import fs from 'fs';
 import mathRouter from './routes/math.js';
 import ProblemDetails from './models/problem-details.js';
 
+
 const app = express();
+
+const file = fs.readFileSync('swagger.yaml', 'utf8');
+const swaggerDocument = yaml.parse(file);
+app.use(
+    '/swagger',
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerDocument)
+);
 
 app.use(mathRouter);
 

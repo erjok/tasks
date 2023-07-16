@@ -1,0 +1,189 @@
+openapi: 3.0.0
+info:
+  title: Math API
+  description: This is a interview homework
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+paths:
+  /min/{numbers}:
+    get:
+      description: Given list of numbers and a quantifier (how many) provides min number(s)
+      operationId: getMin
+      parameters:
+        - $ref: '#/components/parameters/numbersParam'
+        - name: q
+          in: query
+          description: Quantifier of how many min numbers to return
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            default: 1
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  minNumbers:
+                    type: array
+                    items:
+                      type: number
+                    example: [1, 2.5, 3]
+        "400":
+          description: Invalid numbers or quantifier supplied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+
+  /max/{numbers}:
+    get:
+      description: Given list of numbers and a quantifier (how many) provides max number(s)
+      operationId: getMax
+      parameters:
+        - $ref: '#/components/parameters/numbersParam'
+        - name: q
+          in: query
+          description: Quantifier of how many max numbers to return
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            default: 1
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  maxNumbers:
+                    type: array
+                    items:
+                      type: number
+                    example: [3, 2.5, 1]
+        "400":
+          description: Invalid numbers or quantifier supplied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+
+  /avg/{numbers}:
+    get:
+      description: Given list of numbers calculates their average
+      operationId: getAvg
+      parameters:
+        - $ref: '#/components/parameters/numbersParam'
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  avg:
+                    type: number
+                    example: 2.5
+        "400":
+          description: Invalid numbers supplied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+
+  /median/{numbers}:
+    get:
+      description: Given list of numbers calculates their median
+      operationId: getMedian
+      parameters:
+        - $ref: '#/components/parameters/numbersParam'
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  median:
+                    type: number
+                    example: 2.5
+        "400":
+          description: Invalid numbers supplied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+
+  /percentile/{q}/{numbers}:
+    get:
+      description: Given list of numbers and quantifier 'q', computes the qth percentile of the list elements
+      operationId: getPercentile
+      parameters:
+        - $ref: '#/components/parameters/numbersParam'
+        - name: q
+          in: path
+          description: Percentile quantifier
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 100
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  percentile:
+                    type: number
+                    example: 2.5
+        "400":
+          description: Invalid numbers or quantifier supplied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+
+components:
+  schemas:
+    ProblemDetails:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "Bad request."
+        status:
+          type: integer
+          format: int32
+          example: 400
+        errors:
+          type: object
+          example: { "foo": "Invalid value." }
+
+  parameters:
+    numbersParam:
+      name: numbers
+      in: path
+      required: true
+      description: List of numbers
+      style: simple
+      explode: false
+      schema:
+        type: array
+        items:
+          type: number
+        minItems: 1
