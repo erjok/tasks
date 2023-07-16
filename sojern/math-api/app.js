@@ -1,5 +1,6 @@
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
+import morgan from 'morgan';
 import yaml from 'yaml';
 import fs from 'fs';
 import mathRouter from './routes/math.js';
@@ -16,6 +17,7 @@ app.use(
     swaggerUi.setup(swaggerDocument)
 );
 
+app.use(morgan('dev'));
 app.use(mathRouter);
 
 app.get('/', (req, res) => {
