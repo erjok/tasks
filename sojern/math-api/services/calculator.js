@@ -18,16 +18,16 @@ function median(numbers) {
     if (isOdd) {
         const midIndex = Math.floor(numbers.length / 2);
         return numbers[midIndex];
-    } else {
-        const firstMidNumber = numbers[numbers.length / 2 - 1];
-        const secondMidNumber = numbers[numbers.length / 2];
-        return (firstMidNumber + secondMidNumber) / 2;
     }
+
+    const firstMidNumber = numbers[numbers.length / 2 - 1];
+    const secondMidNumber = numbers[numbers.length / 2];
+    return (firstMidNumber + secondMidNumber) / 2;
 }
 
 function percentile(numbers, n) {
     numbers.sort((a, b) => a - b);
-    var index = (n / 100) * (numbers.length - 1);
+    const index = (n / 100) * (numbers.length - 1);
     return numbers[Math.round(index)];
 }
 
@@ -37,4 +37,4 @@ export default {
     avg,
     median,
     percentile,
-}
+};

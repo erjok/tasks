@@ -5,10 +5,10 @@ import { check } from 'express-validator';
 
 import reqValidator from '../../middleware/request-validator.js';
 
-const should = chai.should();
+chai.should();
 chai.use(sinonChai);
 
-describe('request validator middleware' , () => {
+describe('request validator middleware', () => {
     it('should call next middleware when there are no validation errors', async () => {
         const req = { query: { foo: 'bar' } };
         await check('foo').notEmpty().run(req);
@@ -29,8 +29,8 @@ describe('request validator middleware' , () => {
             message: 'One or more validation errors occurred.',
             code: 'ValidationError',
             errors: {
-                foo: 'blah'
-            }
+                foo: 'blah',
+            },
         });
 
         next.should.have.been.calledOnceWithExactly(expectedError);

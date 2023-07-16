@@ -1,7 +1,7 @@
 import chai from 'chai';
 import ProblemDetails from '../../models/problem-details.js';
 
-const should = chai.should();
+chai.should();
 
 describe('problem details', () => {
     it('should create problem details from error', () => {

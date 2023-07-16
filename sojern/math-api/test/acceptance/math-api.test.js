@@ -1,72 +1,71 @@
-import { should } from "chai";
-import request from "supertest";
-import dotenv from "dotenv";
+import { should } from 'chai';
+import request from 'supertest';
+import dotenv from 'dotenv';
 
 dotenv.config();
 should();
 
 const apiUri = process.env.TEST_API_URI;
 
-describe("math api", () => {
-    it("should return version", (done) => {
+describe('math api', () => {
+    it('should return version', done => {
         request(apiUri)
-            .get("/")
+            .get('/')
             .expect(200, {
-                version: '1.0.0'
+                version: '1.0.0',
             }, done);
     });
 
-    it("should return min numbers", (done) => {
+    it('should return min numbers', done => {
         request(apiUri)
-            .get("/min/3,1.3,2,5?q=2")
+            .get('/min/3,1.3,2,5?q=2')
             .expect(200, {
-                minNumbers: [1.3, 2]
+                minNumbers: [1.3, 2],
             }, done);
     });
 
-    it("should return max numbers", (done) => {
+    it('should return max numbers', done => {
         request(apiUri)
-            .get("/max/3.5,1,2,5?q=2")
+            .get('/max/3.5,1,2,5?q=2')
             .expect(200, {
-                maxNumbers: [5, 3.5]
+                maxNumbers: [5, 3.5],
             }, done);
     });
 
-    it("should return average of numbers", (done) => {
+    it('should return average of numbers', done => {
         request(apiUri)
-            .get("/avg/3,1,2,5.0")
+            .get('/avg/3,1,2,5.0')
             .expect(200, {
-                avg: 2.75
+                avg: 2.75,
             }, done);
     });
 
-    it("should return median of numbers", (done) => {
+    it('should return median of numbers', done => {
         request(apiUri)
-            .get("/median/3,1,2,5")
+            .get('/median/3,1,2,5')
             .expect(200, {
-                median: 2.5
+                median: 2.5,
             }, done);
     });
 
-    it("should return qth percentile of numbers", (done) => {
+    it('should return qth percentile of numbers', done => {
         request(apiUri)
-            .get("/percentile/75/3,1,2,5")
+            .get('/percentile/75/3,1,2,5')
             .expect(200, {
-                percentile: 3
+                percentile: 3,
             }, done);
     });
 
-    it("should return bad request with problem details when validation error occurs", (done) => {
+    it('should return bad request with problem details when validation error occurs', done => {
         request(apiUri)
-            .get("/percentile/1/foo")
-            .expect("Content-Type", /problem\+json/)
+            .get('/percentile/1/foo')
+            .expect('Content-Type', /problem\+json/)
             .expect(400, {
-                title: "One or more validation errors occurred.",
+                title: 'One or more validation errors occurred.',
                 status: 400,
                 errors: {
-                    numbers : "Numbers must be a comma-separated list of numbers."
-                }
+                    numbers: 'Numbers must be a comma-separated list of numbers.',
+                },
             }, done);
     });
 });
-

@@ -1,5 +1,6 @@
-import express from "express";
-import { validationResult } from "express-validator";
+// eslint-disable-next-line no-unused-vars
+import express from 'express';
+import { validationResult } from 'express-validator';
 
 /**
  * @type {express.RequestHandler}

@@ -3,7 +3,7 @@ import chaiAlmost from 'chai-almost';
 import calculator from '../../services/calculator.js';
 
 chai.use(chaiAlmost(0.001));
-const should = chai.should();
+chai.should();
 
 describe('calculator', () => {
     [
