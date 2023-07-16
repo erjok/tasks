@@ -15,23 +15,23 @@ describe("math api", () => {
 
     it("should return min numbers", (done) => {
         request(apiUri)
-            .get("/min?numbers=3,1,2,5&q=2")
+            .get("/min/3,1.3,2,5?q=2")
             .expect(200, {
-                minNumbers: [1, 2]
+                minNumbers: [1.3, 2]
             }, done);
     });
 
     it("should return max numbers", (done) => {
         request(apiUri)
-            .get("/max?numbers=3,1,2,5&q=2")
+            .get("/max/3.5,1,2,5?q=2")
             .expect(200, {
-                maxNumbers: [5, 3]
+                maxNumbers: [5, 3.5]
             }, done);
     });
 
     it("should return average of numbers", (done) => {
         request(apiUri)
-            .get("/avg?numbers=3,1,2,5")
+            .get("/avg/3,1,2,5.0")
             .expect(200, {
                 avg: 2.75
             }, done);
@@ -39,7 +39,7 @@ describe("math api", () => {
 
     it("should return median of numbers", (done) => {
         request(apiUri)
-            .get("/median?numbers=3,1,2,5")
+            .get("/median/3,1,2,5")
             .expect(200, {
                 median: 2.5
             }, done);
@@ -47,7 +47,7 @@ describe("math api", () => {
 
     it("should return qth percentile of numbers", (done) => {
         request(apiUri)
-            .get("/percentile?numbers=3,1,2,5&q=75")
+            .get("/percentile/75/3,1,2,5")
             .expect(200, {
                 percentile: 3
             }, done);
@@ -55,7 +55,7 @@ describe("math api", () => {
 
     it("should return bad request with problem details when validation error occurs", (done) => {
         request(apiUri)
-            .get("/percentile?numbers=foo,5&q=1")
+            .get("/percentile/1/foo")
             .expect("Content-Type", /problem\+json/)
             .expect(400, {
                 title: "One or more validation errors occurred.",
