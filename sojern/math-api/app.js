@@ -8,7 +8,7 @@ import ProblemDetails from './models/problem-details.js';
 
 const app = express();
 
-const file = fs.readFileSync('swagger.yaml', 'utf8');
+const file = fs.readFileSync('swagger.yml', 'utf8');
 const swaggerDocument = yaml.parse(file);
 app.use(
     '/swagger',

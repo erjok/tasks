@@ -1,8 +1,11 @@
 import { should } from "chai";
 import request from "supertest";
+import dotenv from "dotenv";
+
+dotenv.config();
 should();
 
-const apiUri = "http://localhost:3000";
+const apiUri = process.env.TEST_API_URI;
 
 describe("math api", () => {
     it("should return version", (done) => {

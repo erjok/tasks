@@ -7,12 +7,20 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 paths:
+  /:
+    get:
+      description: foo
+      responses:
+        default:
+          description: Successful operation
   /min/{numbers}:
     get:
       description: Given list of numbers and a quantifier (how many) provides min number(s)
       operationId: getMin
+      tags:
+        - "Math"
       parameters:
-        - $ref: '#/components/parameters/numbersParam'
+        - $ref: "#/components/parameters/numbersParam"
         - name: q
           in: query
           description: Quantifier of how many min numbers to return
@@ -46,8 +54,10 @@ paths:
     get:
       description: Given list of numbers and a quantifier (how many) provides max number(s)
       operationId: getMax
+      tags:
+        - "Math"
       parameters:
-        - $ref: '#/components/parameters/numbersParam'
+        - $ref: "#/components/parameters/numbersParam"
         - name: q
           in: query
           description: Quantifier of how many max numbers to return
@@ -81,8 +91,10 @@ paths:
     get:
       description: Given list of numbers calculates their average
       operationId: getAvg
+      tags:
+        - "Math"
       parameters:
-        - $ref: '#/components/parameters/numbersParam'
+        - $ref: "#/components/parameters/numbersParam"
       responses:
         "200":
           description: Successful operation
@@ -105,8 +117,10 @@ paths:
     get:
       description: Given list of numbers calculates their median
       operationId: getMedian
+      tags:
+        - "Math"
       parameters:
-        - $ref: '#/components/parameters/numbersParam'
+        - $ref: "#/components/parameters/numbersParam"
       responses:
         "200":
           description: Successful operation
@@ -129,8 +143,10 @@ paths:
     get:
       description: Given list of numbers and quantifier 'q', computes the qth percentile of the list elements
       operationId: getPercentile
+      tags:
+        - "Math"
       parameters:
-        - $ref: '#/components/parameters/numbersParam'
+        - $ref: "#/components/parameters/numbersParam"
         - name: q
           in: path
           description: Percentile quantifier
