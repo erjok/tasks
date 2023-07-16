@@ -23,7 +23,7 @@ const validateNumbers = () =>
         });
 
 router.get('/min',
-    query('q').trim().isInt({ min: 1 }),
+    query('q').trim().isInt({ min: 1 }).withMessage('Quantifier must be an integer number greater than 1.'),
     validateNumbers(),
     reqValidator,
     (req, res) => {
@@ -32,11 +32,15 @@ router.get('/min',
         res.status(200).json({ minNumbers });
     });
 
-router.get('/max', validateNumbers(), reqValidator, (req, res) => {
-    const { numbers, q } = req.query;
-    const maxNumbers = calculator.max(numbers, q);
-    res.status(200).json({ maxNumbers });
-});
+router.get('/max',
+    query('q').trim().isInt({ min: 1 }).withMessage('Quantifier must be an integer number greater than 1.'),
+    validateNumbers(),
+    reqValidator,
+    (req, res) => {
+        const { numbers, q } = req.query;
+        const maxNumbers = calculator.max(numbers, q);
+        res.status(200).json({ maxNumbers });
+    });
 
 router.get('/avg', validateNumbers(), reqValidator, (req, res, next) => {
     const { numbers } = req.query;
@@ -53,7 +57,7 @@ router.get('/median', validateNumbers(), reqValidator, (req, res, next) => {
 router.get('/percentile',
     query('q')
         .notEmpty().withMessage('Percentile quantifier is required.')
-        .isInt({ min: 0, max: 100 }).withMessage('Percentile quantifier must be between 0 and 100.'),
+        .isInt({ min: 0, max: 100 }).withMessage('Percentile quantifier must be an integer number between 0 and 100.'),
     validateNumbers(),
     reqValidator,
     (req, res, next) => {
