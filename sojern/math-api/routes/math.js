@@ -24,7 +24,7 @@ const validateNumbers = () =>
 
 router.get('/min',
     query('q').trim().isInt({ min: 1 }),
-    query('numbers').trim(),
+    validateNumbers(),
     reqValidator,
     (req, res) => {
         const { numbers, q } = req.query;
