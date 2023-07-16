@@ -22,11 +22,15 @@ const validateNumbers = () =>
             return true;
         });
 
-router.get('/min', validateNumbers(), reqValidator, (req, res) => {
-    const { numbers, q } = req.query;
-    const minNumbers = calculator.min(numbers, q);
-    res.status(200).json({ minNumbers });
-});
+router.get('/min',
+    query('q').trim().isInt({ min: 1 }),
+    query('numbers').trim(),
+    reqValidator,
+    (req, res) => {
+        const { numbers, q } = req.query;
+        const minNumbers = calculator.min(numbers, q);
+        res.status(200).json({ minNumbers });
+    });
 
 router.get('/max', validateNumbers(), reqValidator, (req, res) => {
     const { numbers, q } = req.query;
