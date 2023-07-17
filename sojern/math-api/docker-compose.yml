@@ -1,0 +1,17 @@
+version: '3.6'
+
+services:
+  api:
+    image: math-api
+    build:
+      context: .
+    ports:
+      - 3000:80
+
+  test:
+    image: math-api
+    command: npm test
+    environment:
+      - TEST_API_URI=http://api
+    depends_on:
+      - api
