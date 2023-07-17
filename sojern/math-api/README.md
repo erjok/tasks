@@ -30,7 +30,7 @@ This repository a web service that provides a simple API for math operations.
 
 Swagger UI will be available at http://localhost:3000/swagger. You can use it to discover and interact with API resources.
 
-Note: сhange the port accordingly if the API is not running on host port `3000`.
+> Change the port accordingly if the API is not running on host port `3000`.
 
 ## Running acceptance tests
 
@@ -42,7 +42,8 @@ Note: сhange the port accordingly if the API is not running on host port `3000`
     ```shell
     npm test
     ```
-Note: if the API is not running on host port `3000`, use `TEST_API_URI` environment variable to configure API server base path.
+> If the API is not running on host port `3000`, use `TEST_API_URI` environment 
+> variable to configure API server base path.
 
 ### Docker
 1. Navigate to the api root folder
