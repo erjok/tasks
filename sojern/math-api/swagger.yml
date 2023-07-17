@@ -9,10 +9,18 @@ externalDocs:
 paths:
   /:
     get:
-      description: foo
+      description: Returns the API version
       responses:
-        default:
+        "200":
           description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: "1.0.0"
   /min/{numbers}:
     get:
       description: Given list of numbers and a quantifier (how many) provides min number(s)

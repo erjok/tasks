@@ -1,7 +1,7 @@
 version: '3.6'
 
 services:
-  app:
+  api:
     image: math-api
     build:
       context: .
@@ -12,6 +12,6 @@ services:
     image: math-api
     command: npm test
     environment:
-      - TEST_API_URI=http://app
+      - TEST_API_URI=http://api
     depends_on:
-      - app
+      - api
