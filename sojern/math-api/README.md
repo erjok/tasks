@@ -1,6 +1,6 @@
 # Math API
 
-This repository a web service that provides a simple API for math operations.
+A web service that provides a simple API for math operations.
 
 ## Running API
 

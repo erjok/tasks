@@ -1,6 +1,6 @@
 # Util
 
-This is a simple utils library. It provides `VersionComparer` class to compare two versions of a software.
+A simple utils library. It provides `VersionComparer` class to compare two versions of a software.
 
 ## VersionComparer Class
 
